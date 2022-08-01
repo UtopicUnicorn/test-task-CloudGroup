@@ -5,6 +5,9 @@ import { CategoryModule } from './category/category.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TodoModule } from './todo/todo.module';
+import { TodoEntity } from './todo/entities/todo.entity';
+import { CategoryEntity } from './category/entities/category.entity';
 
 @Module({
   imports: [
@@ -14,16 +17,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       playground: true,
       driver: ApolloDriver,
     }),
-    // TypeOrmModule.forRoot({
-    //   type: 'postgres',
-    //   host: 'localhost',
-    //   port: 5432,
-    //   username: 'admin',
-    //   password: 'root',
-    //   database: 'postgres',
-    //   entities: [],
-    //   synchronize: true,
-    // }),
+    TodoModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'ec2-54-170-90-26.eu-west-1.compute.amazonaws.com',
+      username: 'guvrkkyhtbhaey',
+      password:
+        'e04ce1d8b998c66c0d70428141350b8711efcd208ec572f587a17e7300798ff3',
+      database: 'd2v46qs9th4b2a',
+      entities: [__dirname + `dist/**/*.entity{.ts,.js}`],
+      autoLoadEntities: true,
+      synchronize: true,
+      // logging: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
