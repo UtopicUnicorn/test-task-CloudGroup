@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CategoryModule } from './category/category.module';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver } from '@nestjs/apollo';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodoModule } from './todo/todo.module';
 import { TodoEntity } from './todo/entities/todo.entity';
@@ -12,10 +12,11 @@ import { CategoryEntity } from './category/entities/category.entity';
 @Module({
   imports: [
     CategoryModule,
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: true,
       playground: true,
       driver: ApolloDriver,
+      introspection: true,
     }),
     TodoModule,
     TypeOrmModule.forRoot({
