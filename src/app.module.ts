@@ -28,6 +28,11 @@ import { CategoryEntity } from './category/entities/category.entity';
       entities: [__dirname + `dist/**/*.entity{.ts,.js}`],
       autoLoadEntities: true,
       synchronize: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
       // logging: true,
     }),
   ],
