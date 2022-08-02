@@ -4,9 +4,7 @@ import { TodoService } from './todo.service';
 import { TodoEntity } from './entities/todo.entity';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { CategoryEntity } from '../category/entities/category.entity';
 import { CategoryService } from '../category/category.service';
-import { Category } from "../category/model/category";
 
 @Resolver(() => Todo)
 export class TodoResolver {
@@ -20,23 +18,11 @@ export class TodoResolver {
     return this.todoService.getTodos();
   }
 
-  // @Mutation(() => Todo)
-  // async createTodo(
-  //   @Args('createTodo') createTodo: CreateTodoDto,
-  // ): Promise<TodoEntity> {
-  //   return await this.todoService.createTodo(createTodo);
-  // }
-
-  @Mutation(() => Category)
-  async createTodo(categoryName: string, text: string): Promise<TodoEntity> {
-    let category;
-    await this.categoryService
-      .createCategory({ title: categoryName })
-      .then((resp) => (category = resp));
-    return await this.todoService.createTodo({
-      text: text,
-      categoryId: category,
-    });
+  @Mutation(() => Todo)
+  async createTodo(
+    @Args('input') createTodo: CreateTodoDto,
+  ): Promise<TodoEntity> {
+    return await this.todoService.createTodo(createTodo);
   }
 
   @Mutation(() => Todo)
