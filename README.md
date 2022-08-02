@@ -1,6 +1,6 @@
 ## Тестовое задание Облако Group
 
-## Скачивание репозитория
+## Загрузка репозитория
 ```bash
 $ git clone git@github.com:UtopicUnicorn/test-task-CloudGroup.git
 ```
@@ -21,7 +21,7 @@ $ docker-compose up --build
 
 ## Изменить данные для TypeOrm для локальной базы данных
 
-## Запкск приложения
+## Запуск приложения
 
 ```bash
 # development
